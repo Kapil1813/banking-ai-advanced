@@ -15,8 +15,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    pwd_input = st.text_input("Enter demo password:", type="streamlit.errors.StreamlitAPIException: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
-
+    pwd_input = st.text_input("Enter demo password:", type="password")
 Traceback:
 File "/mount/src/banking-ai-advanced/app1.py", line 18, in <module>
     pwd_input = st.text_input("Enter demo password:", type="demo123")
