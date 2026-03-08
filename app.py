@@ -4,6 +4,10 @@ from utils import extract_text, highlight_clauses
 from contract_analyzer import analyze_contract
 from risk_engine import calculate_risk
 import plotly.express as px
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 st.set_page_config(page_title="AI Banking Contract Risk Platform", layout="wide")
 st.title("AI Banking Contract Risk & Compliance Platform")
