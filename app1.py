@@ -1,4 +1,3 @@
-# app1.py
 import streamlit as st
 import os
 from contract_analyzer import analyze_contract
@@ -7,6 +6,9 @@ from utils import extract_text, highlight_clauses
 from dotenv import load_dotenv
 import pandas as pd
 import plotly.express as px
+# --- Password protection ---
+st.set_page_config(page_title="AI Banking Contract Risk Platform", layout="wide")
+st.title("🔒 Secure AI Banking Contract Demo")
 
 # -------------------------
 # Load environment variables for local testing
@@ -29,17 +31,17 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # Display password input
     pwd_input = st.text_input("Enter demo password:", type="password")
-    if pwd_input == PASSWORD:
-        st.session_state.authenticated = True
-        st.success("✅ Access Granted")
-        st.experimental_rerun()  # Immediately rerun app to load main pages
-    elif pwd_input != "":
+
+    if pwd_input and pwd_input == PASSWORD:
+        st.session_state.authenticated = True  # just set the flag
+    elif pwd_input:
         st.error("❌ Incorrect password")
-else:
-    # -------------------------
-    # Main App Layout
+
+# -------------------------
+# Main app only loads if authenticated
+if st.session_state.authenticated:
+
     st.set_page_config(page_title="AI Banking Contract Risk Platform", layout="wide")
     st.title("🔒 AI Banking Contract Risk & Compliance Platform")
 
@@ -73,7 +75,6 @@ else:
         if not st.session_state.contract_text:
             st.warning("Upload a contract first.")
         else:
-            # Run analysis automatically without button click
             result = analyze_contract(st.session_state.contract_text)
             st.session_state.analysis_result = result
             st.subheader("Structured Contract Data")
@@ -93,7 +94,6 @@ else:
         else:
             st.success("Low Risk Contract")
 
-        # Risk Breakdown Chart
         categories = ["Legal", "Financial", "Compliance"]
         values = [risk * 0.4, risk * 0.3, risk * 0.3]
         df = pd.DataFrame({"Category": categories, "Score": values})
@@ -114,3 +114,5 @@ else:
         dist = pd.DataFrame({"Risk Level": ["Low", "Medium", "High"], "Contracts": [5, 3, 2]})
         fig2 = px.bar(dist, x="Risk Level", y="Contracts", color="Risk Level", text="Contracts")
         st.plotly_chart(fig2)
+
+
