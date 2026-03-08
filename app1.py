@@ -15,7 +15,27 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
+    pwd_input = st.text_input("Enter demo password:", type="streamlit.errors.StreamlitAPIException: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
+
+Traceback:
+File "/mount/src/banking-ai-advanced/app1.py", line 18, in <module>
     pwd_input = st.text_input("Enter demo password:", type="demo123")
+File "/home/adminuser/venv/lib/python3.14/site-packages/streamlit/runtime/metrics_util.py", line 532, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+File "/home/adminuser/venv/lib/python3.14/site-packages/streamlit/elements/widgets/text_widgets.py", line 322, in text_input
+    return self._text_input(
+           ~~~~~~~~~~~~~~~~^
+        label=label,
+        ^^^^^^^^^^^^
+    ...<15 lines>...
+        ctx=ctx,
+        ^^^^^^^^
+    )
+    ^
+File "/home/adminuser/venv/lib/python3.14/site-packages/streamlit/elements/widgets/text_widgets.py", line 426, in _text_input
+    raise StreamlitAPIException(
+        f"'{type}' is not a valid text_input type. Valid types are 'default' and 'password'."
+    )")
     if st.button("Login"):
         if pwd_input == PASSWORD:
             st.session_state.authenticated = True
