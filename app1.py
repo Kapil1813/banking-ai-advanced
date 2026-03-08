@@ -9,7 +9,7 @@ st.set_page_config(page_title="AI Banking Contract Risk Platform", layout="wide"
 st.title("🔒 Secure AI Banking Contract Demo")
 
 # Simple password
-PASSWORD = "Demo2026!"
+PASSWORD = "demo123"
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
